@@ -178,6 +178,26 @@ export default function CreateRestaurantScreen ({ navigation }) {
               />
               <ErrorMessage name={'restaurantCategoryId'} render={msg => <TextError>{msg}</TextError> }/>
 
+              <Pressable onPress={() => navigation.navigate('CreateRestaurantCategoryScreen')}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed
+                    ? 'yellow'
+                    : '#079F94'
+                },
+                styles.actionButton
+              ]}
+              >
+
+                <View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'center' }]}>
+                  <MaterialCommunityIcons name='folder-plus-outline' color={'white'} size={20}/>
+                  <TextRegular textStyle={styles.text}>
+                    New category
+                  </TextRegular>
+                </View>
+
+              </Pressable>
+
               <Pressable onPress={() =>
                 pickImage(
                   async result => {
@@ -241,6 +261,13 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 20,
     marginBottom: 20
+  },
+  actionButton: {
+    borderRadius: 8,
+    height: 40,
+    marginTop: 20,
+    margin: '1%',
+    padding: 10
   },
   text: {
     fontSize: 16,
