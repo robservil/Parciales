@@ -77,7 +77,8 @@ export default function CreateRestaurantScreen ({ navigation }) {
       }
     }
     fetchRestaurantCategories()
-  }, [])
+  }, [navigation])
+  console.log(restaurantCategories)
 
   useEffect(() => {
     (async () => {
@@ -105,6 +106,7 @@ export default function CreateRestaurantScreen ({ navigation }) {
   }
 
   const createRestaurant = async (values) => {
+    console.log(values)
     setBackendErrors([])
     try {
       const createdRestaurant = await create(values)
