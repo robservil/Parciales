@@ -22,7 +22,7 @@ export default function EditRestaurantScreen ({ navigation, route }) {
   const [backendErrors, setBackendErrors] = useState()
   const [restaurant, setRestaurant] = useState({})
 
-  const [initialRestaurantValues, setInitialRestaurantValues] = useState({ name: null, description: null, address: null, postalCode: null, url: null, shippingCosts: null, email: null, phone: null, restaurantCategoryId: null, logo: null, heroImage: null })
+  const [initialRestaurantValues, setInitialRestaurantValues] = useState({ name: null, description: null, address: null, postalCode: null, url: null, shippingCosts: null, email: null, phone: null, discountPercentage: null, restaurantCategoryId: null, logo: null, heroImage: null })
   const validationSchema = yup.object().shape({
     name: yup
       .string()
@@ -52,6 +52,12 @@ export default function EditRestaurantScreen ({ navigation, route }) {
       .string()
       .nullable()
       .max(255, 'Phone too long'),
+    discountPercentage: yup
+      .number()
+      .positive()
+      .integer()
+      .min(0)
+      .max(100),
     restaurantCategoryId: yup
       .number()
       .positive()
@@ -78,6 +84,8 @@ export default function EditRestaurantScreen ({ navigation, route }) {
     }
     fetchRestaurantDetail()
   }, [route])
+  console.log('pR' + restaurant.discountPercentage)
+  console.log(initialRestaurantValues)
 
   useEffect(() => {
     async function fetchRestaurantCategories () {
@@ -185,6 +193,10 @@ export default function EditRestaurantScreen ({ navigation, route }) {
               <InputItem
                 name='phone'
                 label='Phone:'
+              />
+              <InputItem
+                name='discountPercentage'
+                label='Discount percentage:'
               />
 
               <DropDownPicker

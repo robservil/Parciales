@@ -41,6 +41,9 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
+      discountPercentage: {
+        type: Sequelize.STRING
+      },
       logo: {
         type: Sequelize.STRING
       },

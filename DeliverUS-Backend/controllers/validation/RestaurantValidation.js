@@ -36,6 +36,15 @@ module.exports = {
     check('shippingCosts').exists().isFloat({ min: 0 }).toFloat(),
     check('email').optional({ nullable: true, checkFalsy: true }).isString().isEmail().trim(),
     check('phone').optional({ nullable: true, checkFalsy: true }).isString().isLength({ min: 1, max: 255 }).trim(),
+    check('discountPercentage').optional({ nullable: true, checkFalsy: true }).isInt({ min: 0, max: 100 }).toInt().custom(
+      (value) => {
+        if (value) {
+          return value
+        } else {
+          return 0
+        }
+      }
+    ),
     check('restaurantCategoryId').exists({ checkNull: true }).isInt({ min: 1 }).toInt(),
     check('userId').not().exists(),
     check('heroImage').custom((value, { req }) => {
